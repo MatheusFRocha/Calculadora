@@ -17,7 +17,7 @@ public class calculadoraJava extends JFrame {
 	private JTextField textField;
 
 	/**
-	 * Launch the application.
+	 * Launch the application.  ------------->     ALTERADO DO GIT
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
