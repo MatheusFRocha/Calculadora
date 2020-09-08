@@ -18,7 +18,8 @@ public class calculadoraJava extends JFrame {
 
 	/**
 	 * Launch the application.  ------------->     ALTERADO DO GIT
-	 *                          ------------->     ALTERADO DO ECLIPSE 
+	 *                          ------------->     ALTERADO DO ECLIPSE
+	 *                          ------------->     TESTE DE PUSH 
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
