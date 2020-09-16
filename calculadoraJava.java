@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -10,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class calculadoraJava extends JFrame {
 
@@ -47,6 +50,10 @@ public class calculadoraJava extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		Double[] A = new Double [2];
+		Double[] B = new Double [2]; 
+		int[] sinais = new int [2];
 		
 		JButton btnNewButton = new JButton("9");
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -144,16 +151,33 @@ public class calculadoraJava extends JFrame {
 				textField.setText(textField.getText() + "0");
 			}
 		});
+		
+		JLabel lblNewLabel = new JLabel("Label");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		lblNewLabel.setBounds(150, 11, 357, 39);
+		contentPane.add(lblNewLabel);
+		lblNewLabel.setText("");
+		
 		btnNewButton_8.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_8.setBounds(24, 413, 116, 62);
 		contentPane.add(btnNewButton_8);
 		
 		JButton btnNewButton_9 = new JButton("+");
 		btnNewButton_9.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
-				textField.setText(textField.getText() + "+");
-			}
-		});
+				
+				if ((sinais[1]> 0)&(sinais[1]< 5)){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
+				}
+				else {
+					A[1] = (Double.parseDouble(textField.getText()));
+					lblNewLabel.setText("");
+					lblNewLabel.setText(lblNewLabel.getText()+A[1]+"+");
+						sinais[1] = 1;
+						textField.setText("");
+				}}});
 		btnNewButton_9.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_9.setBounds(432, 197, 93, 62);
 		contentPane.add(btnNewButton_9);
@@ -161,9 +185,16 @@ public class calculadoraJava extends JFrame {
 		JButton btnNewButton_9_1 = new JButton("-");
 		btnNewButton_9_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setText(textField.getText() + "-");
-			}
-		});
+				if ((sinais[1]> 0)&(sinais[1]< 5)){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
+				}
+				else {
+					A[1] = (Double.parseDouble(textField.getText()));
+					lblNewLabel.setText("");
+					lblNewLabel.setText(lblNewLabel.getText()+A[1]+"-");
+						sinais[1] = 2;
+						textField.setText("");
+				}}});
 		btnNewButton_9_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_9_1.setBounds(432, 270, 93, 62);
 		contentPane.add(btnNewButton_9_1);
@@ -171,9 +202,16 @@ public class calculadoraJava extends JFrame {
 		JButton btnNewButton_9_2 = new JButton("*");
 		btnNewButton_9_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setText(textField.getText() + "*");
-			}
-		});
+				if ((sinais[1]> 0)&(sinais[1]< 5)){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
+				}
+				else {
+						A[1] = (Double.parseDouble(textField.getText()));
+						lblNewLabel.setText("");
+						lblNewLabel.setText(lblNewLabel.getText()+A[1]+"*");
+						sinais[1] = 3;
+						textField.setText("");
+				}}});
 		btnNewButton_9_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_9_2.setBounds(432, 343, 93, 62);
 		contentPane.add(btnNewButton_9_2);
@@ -181,23 +219,62 @@ public class calculadoraJava extends JFrame {
 		JButton btnNewButton_9_3 = new JButton("/");
 		btnNewButton_9_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textField.setText(textField.getText() + "/");
-			}
-		});
+				if ((sinais[1]> 0)&(sinais[1]< 5)){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
+				}
+				else {
+					A[1] = (Double.parseDouble(textField.getText()));
+					lblNewLabel.setText("");
+					lblNewLabel.setText(lblNewLabel.getText()+A[1]+"/");
+						sinais[1] = 4;
+						textField.setText("");
+				}}});
 		btnNewButton_9_3.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_9_3.setBounds(432, 413, 93, 62);
 		contentPane.add(btnNewButton_9_3);
 		
 		textField = new JTextField();
-		textField.setBounds(10, 61, 505, 125);
+		textField.setBounds(24, 61, 491, 125);
 		contentPane.add(textField);
 		textField.setColumns(10);
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		
 		JButton btnNewButton_7_1 = new JButton("=");
 		btnNewButton_7_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (sinais[1] == 0) {
+				JOptionPane.showMessageDialog(null, "Operação incompleta");
 			}
-		});
+			else {
+				B[1] = (Double.parseDouble(textField.getText()));
+				
+				if (sinais[1] == 1) {
+					textField.setText(A[1]+B[1]+"");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					sinais[1] = 0;
+					B[1] = 0.0;
+				}
+				if (sinais[1] == 2) {
+					textField.setText(A[1]-B[1]+"");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					sinais[1] = 0;
+					B[1] = 0.0;
+				}
+				if (sinais[1] == 3) {
+					textField.setText(A[1]*B[1]+"");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					sinais[1] = 0;
+					B[1] = 0.0;
+				}
+				if (sinais[1] == 4) {
+					textField.setText(A[1]/B[1]+"");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					sinais[1] = 0;
+					B[1] = 0.0;
+				}
+			}
+			}});
 		btnNewButton_7_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_7_1.setBounds(276, 413, 116, 62);
 		contentPane.add(btnNewButton_7_1);
@@ -211,5 +288,21 @@ public class calculadoraJava extends JFrame {
 		btnNewButton_7_2.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_7_2.setBounds(150, 413, 116, 62);
 		contentPane.add(btnNewButton_7_2);
+		
+		JButton btnNewButton_11 = new JButton("CE");
+		btnNewButton_11.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnNewButton_11.setBounds(24, 11, 75, 39);
+		contentPane.add(btnNewButton_11);
+		
+		
+		btnNewButton_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textField.setText("");
+				A[1] = 0.0;
+				B[1] = 0.0;
+				lblNewLabel.setText("");
+			}
+		});
+		
 	}
 }
