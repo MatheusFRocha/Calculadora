@@ -13,6 +13,12 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import java.awt.Scrollbar;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import java.awt.ScrollPane;
 
 public class calculadoraJava extends JFrame {
 
@@ -152,10 +158,10 @@ public class calculadoraJava extends JFrame {
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("Label");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblNewLabel.setBounds(150, 11, 357, 39);
+		JTextField lblNewLabel = new JTextField("Label");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setEditable(false);
+		lblNewLabel.setBounds(150, 11, 357, 23);
 		contentPane.add(lblNewLabel);
 		lblNewLabel.setText("");
 		
@@ -167,13 +173,18 @@ public class calculadoraJava extends JFrame {
 		btnNewButton_9.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
+				if (((sinais[1]> 0)&(sinais[1]< 5))){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");}
 				
-				if ((sinais[1]> 0)&(sinais[1]< 5)){  
-					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
-				}
-				else {
+				else if(lblNewLabel.getText()==null||!lblNewLabel.getText().trim().equals("")){
 					A[1] = (Double.parseDouble(textField.getText()));
-					lblNewLabel.setText("");
+					lblNewLabel.setText(lblNewLabel.getText()+"+");
+						sinais[1] = 1;
+						textField.setText("");
+				}
+				
+				else  {
+					A[1] = (Double.parseDouble(textField.getText()));
 					lblNewLabel.setText(lblNewLabel.getText()+A[1]+"+");
 						sinais[1] = 1;
 						textField.setText("");
@@ -185,12 +196,18 @@ public class calculadoraJava extends JFrame {
 		JButton btnNewButton_9_1 = new JButton("-");
 		btnNewButton_9_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if ((sinais[1]> 0)&(sinais[1]< 5)){  
-					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
+				if (((sinais[1]> 0)&(sinais[1]< 5))){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");}
+				
+				else if(lblNewLabel.getText()==null||!lblNewLabel.getText().trim().equals("")){
+					A[1] = (Double.parseDouble(textField.getText()));
+					lblNewLabel.setText(lblNewLabel.getText()+"-");
+						sinais[1] = 2;
+						textField.setText("");
 				}
+				
 				else {
 					A[1] = (Double.parseDouble(textField.getText()));
-					lblNewLabel.setText("");
 					lblNewLabel.setText(lblNewLabel.getText()+A[1]+"-");
 						sinais[1] = 2;
 						textField.setText("");
@@ -202,13 +219,19 @@ public class calculadoraJava extends JFrame {
 		JButton btnNewButton_9_2 = new JButton("*");
 		btnNewButton_9_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if ((sinais[1]> 0)&(sinais[1]< 5)){  
-					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
+				if (((sinais[1]> 0)&(sinais[1]< 5))){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");}
+				
+				else if(lblNewLabel.getText()==null||!lblNewLabel.getText().trim().equals("")){
+					A[1] = (Double.parseDouble(textField.getText()));
+					lblNewLabel.setText(lblNewLabel.getText()+"*");
+						sinais[1] = 3;
+						textField.setText("");
 				}
+				
 				else {
-						A[1] = (Double.parseDouble(textField.getText()));
-						lblNewLabel.setText("");
-						lblNewLabel.setText(lblNewLabel.getText()+A[1]+"*");
+					A[1] = (Double.parseDouble(textField.getText()));
+					lblNewLabel.setText(lblNewLabel.getText()+A[1]+"*");
 						sinais[1] = 3;
 						textField.setText("");
 				}}});
@@ -219,12 +242,18 @@ public class calculadoraJava extends JFrame {
 		JButton btnNewButton_9_3 = new JButton("/");
 		btnNewButton_9_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if ((sinais[1]> 0)&(sinais[1]< 5)){  
-					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");	
+				if (((sinais[1]> 0)&(sinais[1]< 5))){  
+					JOptionPane.showMessageDialog(null, "Operação já selecionada, termine primeiro a operação atual");}
+				
+				else if(lblNewLabel.getText()==null||!lblNewLabel.getText().trim().equals("")){
+					A[1] = (Double.parseDouble(textField.getText()));
+					lblNewLabel.setText(lblNewLabel.getText()+"/");
+						sinais[1] = 4;
+						textField.setText("");
 				}
+				
 				else {
 					A[1] = (Double.parseDouble(textField.getText()));
-					lblNewLabel.setText("");
 					lblNewLabel.setText(lblNewLabel.getText()+A[1]+"/");
 						sinais[1] = 4;
 						textField.setText("");
@@ -251,25 +280,25 @@ public class calculadoraJava extends JFrame {
 				
 				if (sinais[1] == 1) {
 					textField.setText(A[1]+B[1]+"");
-					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"="+textField.getText());
 					sinais[1] = 0;
 					B[1] = 0.0;
 				}
 				if (sinais[1] == 2) {
 					textField.setText(A[1]-B[1]+"");
-					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"="+textField.getText());
 					sinais[1] = 0;
 					B[1] = 0.0;
 				}
 				if (sinais[1] == 3) {
 					textField.setText(A[1]*B[1]+"");
-					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"="+textField.getText());
 					sinais[1] = 0;
 					B[1] = 0.0;
 				}
 				if (sinais[1] == 4) {
 					textField.setText(A[1]/B[1]+"");
-					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"=");
+					lblNewLabel.setText(lblNewLabel.getText()+B[1]+"="+textField.getText());
 					sinais[1] = 0;
 					B[1] = 0.0;
 				}
@@ -293,7 +322,6 @@ public class calculadoraJava extends JFrame {
 		btnNewButton_11.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		btnNewButton_11.setBounds(24, 11, 75, 39);
 		contentPane.add(btnNewButton_11);
-		
 		
 		btnNewButton_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
